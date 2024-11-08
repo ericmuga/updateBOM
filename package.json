@@ -1,6 +1,7 @@
 {
   "name": "updatebom",
   "version": "1.0.0",
+  "type": "module",
   "description": "a script for updating BOMs from excel",
   "main": "index.js",
   "scripts": {
@@ -11,5 +12,10 @@
     "url": "git remote add origin https://github.com/ericmuga/updateBOM.git"
   },
   "author": "Eric",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mssql": "^11.0.1",
+    "sql": "^0.78.0",
+    "xlsx": "^0.18.5"
+  }
 }
