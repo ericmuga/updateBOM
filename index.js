@@ -8,9 +8,10 @@ import { fileURLToPath } from 'url';
 // Create the equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const sheet="StdChopping";
 
 // Load the Excel file using the path with __dirname
-const workbook = xlsx.readFile(path.resolve(__dirname, "../updateBOM/Files/otherChopping.xlsx"));
+const workbook = xlsx.readFile(path.resolve(__dirname, `../updateBOM/Files/${sheet}.xlsx`));
 const sheetName = workbook.SheetNames[0];
 const worksheet = workbook.Sheets[sheetName];
 
@@ -18,10 +19,13 @@ const worksheet = workbook.Sheets[sheetName];
 const data = xlsx.utils.sheet_to_json(worksheet);
 
 // Filter out blank rows and rows without an ItemNo
-const filteredData = data.filter(row => row.ItemNo && row.ItemNo.trim() !== "");
+const filteredData = data.filter(row => 
+  row.ItemNo && row.ItemNo.trim() !== "" && 
+  row.BOMNo && row.BOMNo.trim() !== ""
+);
 
 // Save filtered data to a JSON file for preview
-fs.writeFile("filteredData.json", JSON.stringify(filteredData, null, 2), (err) => {
+fs.writeFile(`${sheet}.json`, JSON.stringify(filteredData, null, 2), (err) => {
   if (err) {
     console.error("Error writing to file:", err);
   } else {
@@ -46,114 +50,134 @@ const processData = async (data) => {
         IntakeItemDescription,
         BaseUOM,
         UsagePerBatch,
-        UnitsPer100,
+        // UnitsPer100,
         LocationCode,
         AutoAccummulate,
         Comments,
         OutputItem,
-        OutputItemDescription
+        OutputItemDescription,
+        Scrap,
       } = row;
-
+      const UnitsPer100 = parseFloat(row[" Units Per 100 "]).toFixed(2);
+      const ScrapValue = parseFloat(Scrap).toFixed(2)|| 0; // Use default if Scrap is missing or null
+// const IntakeItemDescription
       if (Comments === "Item Added") {
         // Insert into FCL$Production BOM Line
-        await pool.request()
-          .input("ProductionBOMNo", sql.VarChar, BOMNo)
-          .input("VersionCode", sql.Int, 0)  
-          .input("Type", sql.Int, 1)
-          .input("LineNo", sql.Int, lineNo)
-          .input("No_", sql.VarChar, ItemNo)
-          .input("Description", sql.VarChar, IntakeItemDescription)
-          .input("UnitOfMeasureCode", sql.VarChar, BaseUOM)
-          .input("Quantity", sql.Float, UsagePerBatch)
-          .input("Position", sql.VarChar, '')
-          .input("Position2", sql.VarChar, '')
-          .input("Position3", sql.VarChar, '')
-          .input("LeadTimeOffset", sql.VarChar, '')
-          .input("RoutingLinkCode", sql.VarChar, '')
-          .input("Scrap_", sql.Float, 0)
-          .input("VariantCode", sql.VarChar, '')
-          .input("LinkedBOMOrFamily", sql.VarChar, OutputItem)
-          .input("StartingDate", sql.Date, '1753-01-01')
-          .input("EndingDate", sql.Date, '1753-01-01')
-          .input("Length", sql.Float, 0)
-          .input("Width", sql.Float, 0)
-          .input("Weight", sql.Float, 0)
-          .input("Depth", sql.Float, 0)
-          .input("CalculationFormula", sql.VarChar, '')
-          .input("QuantityPer", sql.Float, UsagePerBatch)
-          .query(`
-            INSERT INTO [dbo].[FCL$Production BOM Line] (
-              [Production BOM No_], 
-              [Version Code],
-              [Type],
-              [Line No_], 
-              [No_], 
-              [Description],
-              [Unit of Measure Code], 
-              [Quantity], 
-              [Position],
-              [Position 2],
-              [Position 3],
-              [Lead-Time Offset], 
-              [Routing Link Code],
-              [Linked BOM or Family],
-              [Scrap _],
-              [Variant Code],
-              [Starting Date],
-              [Ending Date],
-              [Length],
-              [Width],
-              [Weight],
-              [Depth],
-              [Calculation Formula],
-              [Quantity per]
-            ) VALUES (
-              @ProductionBOMNo,
-              @VersionCode,
-              @Type,
-              @LineNo, 
-              @No_, 
-              @Description,
-              @UnitOfMeasureCode, 
-              @Quantity,
-              @Position, 
-              @Position2,
-              @Position3,
-              @LeadTimeOffset,
-              @RoutingLinkCode,
-              @Scrap_,
-              @VariantCode,
-              @StartingDate,
-              @EndingDate,
-              @Length,
-              @Width,
-              @Weight,
-              @Depth,
-              @CalculationFormula,
-              @QuantityPer
-             )
-          `);
+        const descriptionValue = IntakeItemDescription || ''; // Use default if IntakeItemDescription is missing or null
+        const uom = BaseUOM || 'KG'; // Use default if IntakeItemDescription is missing or null
 
+        await pool.request()
+        .input("ProductionBOMNo", sql.VarChar, BOMNo)
+        .input("VersionCode", sql.Int, 0)  
+        .input("Type", sql.Int, 1)
+        .input("LineNo", sql.Int, lineNo)
+        .input("No_", sql.VarChar, ItemNo)
+        .input("IntakeItemDescription", sql.VarChar, descriptionValue)
+        .input("UnitOfMeasureCode", sql.VarChar, uom)
+        .input("Quantity", sql.Float,UnitsPer100)
+        .input("Position", sql.VarChar, '')
+        .input("Position2", sql.VarChar, '')
+        .input("Position3", sql.VarChar, '')
+        .input("LeadTimeOffset", sql.VarChar, '')
+        .input("RoutingLinkCode", sql.VarChar, '')
+        .input("Scrap_", sql.Float, ScrapValue)
+        .input("VariantCode", sql.VarChar, '')
+        .input("LinkedBOMOrFamily", sql.VarChar, OutputItem)
+        .input("StartingDate", sql.Date, '1753-01-01')
+        .input("EndingDate", sql.Date, '1753-01-01')
+        .input("Length", sql.Float, 0)
+        .input("Width", sql.Float, 0)
+        .input("Weight", sql.Float, 0)
+        .input("Depth", sql.Float, 0)
+        .input("CalculationFormula", sql.VarChar, '')
+        .input("QuantityPer", sql.Float, 1)
+        .query(`
+          IF NOT EXISTS (
+            SELECT 1 FROM [dbo].[FCL$Production BOM Line] 
+            WHERE [Production BOM No_] = @ProductionBOMNo AND [No_] = @No_
+          )
+          BEGIN
+          INSERT INTO [dbo].[FCL$Production BOM Line] (
+            [Production BOM No_], 
+            [Version Code],
+            [Type],
+            [Line No_], 
+            [No_], 
+            [Description],
+            [Unit of Measure Code], 
+            [Quantity], 
+            [Position],
+            [Position 2],
+            [Position 3],
+            [Lead-Time Offset], 
+            [Routing Link Code],
+            [Scrap _],
+            [Variant Code],
+            [Starting Date],
+            [Ending Date],
+            [Length],
+            [Width],
+            [Weight],
+            [Depth],
+            [Calculation Formula],
+            [Quantity per]
+          ) VALUES (
+            @ProductionBOMNo,
+            @VersionCode,
+            @Type,
+            @LineNo, 
+            @No_, 
+            @IntakeItemDescription,
+            @UnitOfMeasureCode, 
+            @Quantity,
+            @Position, 
+            @Position2,
+            @Position3,
+            @LeadTimeOffset,
+            @RoutingLinkCode,
+            @Scrap_,
+            @VariantCode,
+            @StartingDate,
+            @EndingDate,
+            @Length,
+            @Width,
+            @Weight,
+            @Depth,
+            @CalculationFormula,
+            @QuantityPer
+          )
+          END
+        `);
+      const LocationCodeValue = LocationCode || ''; // Use default if LocationCode is missing or null
+      const AutoAccummulateValue = AutoAccummulate || 0; // Convert "Yes" to 1, "No" to 0
         // Insert into FCL$BOMSwapLines
         await pool.request()
           .input("BOMNo", sql.VarChar, BOMNo)
           .input("ItemNo", sql.VarChar, ItemNo)
-          .input("LocationCode", sql.VarChar, LocationCode)
+          .input("LocationCode", sql.VarChar, LocationCodeValue)
           .input("ShortCode", sql.VarChar, '')
-          .input("AutoAccummulate", sql.Bit, AutoAccummulate)
+          .input("AutoAccummulate", sql.Bit, AutoAccummulateValue)
           .input("UnitsPer100", sql.Float, UnitsPer100)
-          .input("LinkedToInput", sql.VarChar, 0)
-          .input("LinkedToOutput", sql.VarChar, 1)
-          .input("DefaultQty", sql.VarChar, 0)
-          .input("PiecesMandatory", sql.VarChar, 0)
+          .input("LinkedToInput", sql.Int, 0)
+          .input("LinkedToOutput", sql.Int, 1)
+          .input("DefaultQty", sql.Float, 0)
+          .input("PiecesMandatory", sql.Int, 0)
+          .input("linkedBOMOrFamily", sql.VarChar, '')
           .query(`
+            IF NOT EXISTS (
+            SELECT 1 FROM [dbo].[FCL$BOMSwapLines] 
+            WHERE [BOMNo] = @BOMNo AND [ItemNo] = @ItemNo
+          )
+            BEGIN
             INSERT INTO [dbo].[FCL$BOMSwapLines] (
-              [BOMNo], [ItemNo], [Location Code], [ShortCode], [AutoAccummulate],
-              [Units Per 100], [LinkedToInput], [LinkedToOutput], [Default Qty], [Pieces Mandatory]
+              [BOMNo], [ItemNo], [Location Code], [Short Code], [AutoAccummulate],
+              [Units Per 100], [LinkedToInput], [LinkedToOutput], [Default Qty], [Pieces Mandatory],
+          [Linked BOM or Family]
             ) VALUES (
               @BOMNo, @ItemNo, @LocationCode, @ShortCode, @AutoAccummulate,
-              @UnitsPer100, @LinkedToInput, @LinkedToOutput, @DefaultQty, @PiecesMandatory
+              @UnitsPer100, @LinkedToInput, @LinkedToOutput, @DefaultQty, @PiecesMandatory,@linkedBOMOrFamily
             )
+            END
           `);
         
       } else if (Comments === "Item Removed") {
