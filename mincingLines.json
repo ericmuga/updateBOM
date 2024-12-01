@@ -1,0 +1,362 @@
+[
+    {
+      "production_order_no": "MC_1732985712736",
+      "Quantity": 193.99,
+      "uom": "KG",
+      "ItemNo": "G2005",
+      "LocationCode": "2055",
+      "BIN": "",
+      "user": 120,
+      "line_no": 1000,
+      "routing": "production_order.bc",
+      "date_time": "2024-11-30T16:55:12.736Z",
+      "ProductionJournalLines": [
+        {
+          "ItemNo": "G1291",
+          "Quantity": 204.2,
+          "uom": "KG",
+          "LocationCode": "1570",
+          "BIN": "",
+          "line_no": 1000,
+          "type": "consumption",
+          "date_time": "2024-11-30T16:55:12.736Z",
+          "user": 120
+        },
+        {
+          "ItemNo": "G2005",
+          "Quantity": 193.99,
+          "uom": "KG",
+          "LocationCode": "2055",
+          "BIN": "",
+          "line_no": 2000,
+          "type": "output",
+          "date_time": "2024-11-30T16:55:12.736Z",
+          "user": 120
+        }
+      ]
+    },
+    {
+      "production_order_no": "MC_1732985712738",
+      "Quantity": 191.61,
+      "uom": "KG",
+      "ItemNo": "G2009",
+      "LocationCode": "2055",
+      "BIN": "",
+      "user": 120,
+      "line_no": 1000,
+      "routing": "production_order.bc",
+      "date_time": "2024-11-30T16:55:12.738Z",
+      "ProductionJournalLines": [
+        {
+          "ItemNo": "G1464",
+          "Quantity": 201.7,
+          "uom": "KG",
+          "LocationCode": "1570",
+          "BIN": "",
+          "line_no": 1000,
+          "type": "consumption",
+          "date_time": "2024-11-30T16:55:12.738Z",
+          "user": 120
+        },
+        {
+          "ItemNo": "G2009",
+          "Quantity": 191.61,
+          "uom": "KG",
+          "LocationCode": "2055",
+          "BIN": "",
+          "line_no": 2000,
+          "type": "output",
+          "date_time": "2024-11-30T16:55:12.738Z",
+          "user": 120
+        }
+      ]
+    },
+    {
+      "production_order_no": "MC_1732985712740",
+      "Quantity": 195.8,
+      "uom": "KG",
+      "ItemNo": "G2005",
+      "LocationCode": "2055",
+      "BIN": "",
+      "user": 120,
+      "line_no": 1000,
+      "routing": "production_order.bc",
+      "date_time": "2024-11-30T16:55:12.740Z",
+      "ProductionJournalLines": [
+        {
+          "ItemNo": "G1291",
+          "Quantity": 206.1,
+          "uom": "KG",
+          "LocationCode": "1570",
+          "BIN": "",
+          "line_no": 1000,
+          "type": "consumption",
+          "date_time": "2024-11-30T16:55:12.740Z",
+          "user": 120
+        },
+        {
+          "ItemNo": "G2005",
+          "Quantity": 195.8,
+          "uom": "KG",
+          "LocationCode": "2055",
+          "BIN": "",
+          "line_no": 2000,
+          "type": "output",
+          "date_time": "2024-11-30T16:55:12.740Z",
+          "user": 120
+        }
+      ]
+    },
+    {
+      "production_order_no": "MC_1732985712742",
+      "Quantity": 142.88,
+      "uom": "KG",
+      "ItemNo": "G2007",
+      "LocationCode": "2055",
+      "BIN": "",
+      "user": 120,
+      "line_no": 1000,
+      "routing": "production_order.bc",
+      "date_time": "2024-11-30T16:55:12.742Z",
+      "ProductionJournalLines": [
+        {
+          "ItemNo": "G1269",
+          "Quantity": 150.4,
+          "uom": "KG",
+          "LocationCode": "1570",
+          "BIN": "",
+          "line_no": 1000,
+          "type": "consumption",
+          "date_time": "2024-11-30T16:55:12.742Z",
+          "user": 120
+        },
+        {
+          "ItemNo": "G2007",
+          "Quantity": 142.88,
+          "uom": "KG",
+          "LocationCode": "2055",
+          "BIN": "",
+          "line_no": 2000,
+          "type": "output",
+          "date_time": "2024-11-30T16:55:12.742Z",
+          "user": 120
+        }
+      ]
+    },
+    {
+      "production_order_no": "MC_1732985712744",
+      "Quantity": 119.32,
+      "uom": "KG",
+      "ItemNo": "G2044",
+      "LocationCode": "2055",
+      "BIN": "",
+      "user": 120,
+      "line_no": 1000,
+      "routing": "production_order.bc",
+      "date_time": "2024-11-30T16:55:12.744Z",
+      "ProductionJournalLines": [
+        {
+          "ItemNo": "G1338",
+          "Quantity": 125.6,
+          "uom": "KG",
+          "LocationCode": "1570",
+          "BIN": "",
+          "line_no": 1000,
+          "type": "consumption",
+          "date_time": "2024-11-30T16:55:12.744Z",
+          "user": 120
+        },
+        {
+          "ItemNo": "G2044",
+          "Quantity": 119.32,
+          "uom": "KG",
+          "LocationCode": "2055",
+          "BIN": "",
+          "line_no": 2000,
+          "type": "output",
+          "date_time": "2024-11-30T16:55:12.744Z",
+          "user": 120
+        }
+      ]
+    },
+    {
+      "production_order_no": "MC_1732985712746",
+      "Quantity": 185.16,
+      "uom": "KG",
+      "ItemNo": "G2009",
+      "LocationCode": "2055",
+      "BIN": "",
+      "user": 120,
+      "line_no": 1000,
+      "routing": "production_order.bc",
+      "date_time": "2024-11-30T16:55:12.746Z",
+      "ProductionJournalLines": [
+        {
+          "ItemNo": "G1464",
+          "Quantity": 194.9,
+          "uom": "KG",
+          "LocationCode": "1570",
+          "BIN": "",
+          "line_no": 1000,
+          "type": "consumption",
+          "date_time": "2024-11-30T16:55:12.746Z",
+          "user": 120
+        },
+        {
+          "ItemNo": "G2009",
+          "Quantity": 185.16,
+          "uom": "KG",
+          "LocationCode": "2055",
+          "BIN": "",
+          "line_no": 2000,
+          "type": "output",
+          "date_time": "2024-11-30T16:55:12.746Z",
+          "user": 120
+        }
+      ]
+    },
+    {
+      "production_order_no": "MC_1732985712748",
+      "Quantity": 206.81,
+      "uom": "KG",
+      "ItemNo": "G2005",
+      "LocationCode": "2055",
+      "BIN": "",
+      "user": 120,
+      "line_no": 1000,
+      "routing": "production_order.bc",
+      "date_time": "2024-11-30T16:55:12.748Z",
+      "ProductionJournalLines": [
+        {
+          "ItemNo": "G1291",
+          "Quantity": 217.7,
+          "uom": "KG",
+          "LocationCode": "1570",
+          "BIN": "",
+          "line_no": 1000,
+          "type": "consumption",
+          "date_time": "2024-11-30T16:55:12.748Z",
+          "user": 120
+        },
+        {
+          "ItemNo": "G2005",
+          "Quantity": 206.81,
+          "uom": "KG",
+          "LocationCode": "2055",
+          "BIN": "",
+          "line_no": 2000,
+          "type": "output",
+          "date_time": "2024-11-30T16:55:12.748Z",
+          "user": 120
+        }
+      ]
+    },
+    {
+      "production_order_no": "MC_1732985712750",
+      "Quantity": 165.96,
+      "uom": "KG",
+      "ItemNo": "G2009",
+      "LocationCode": "2055",
+      "BIN": "",
+      "user": 120,
+      "line_no": 1000,
+      "routing": "production_order.bc",
+      "date_time": "2024-11-30T16:55:12.750Z",
+      "ProductionJournalLines": [
+        {
+          "ItemNo": "G1464",
+          "Quantity": 174.7,
+          "uom": "KG",
+          "LocationCode": "1570",
+          "BIN": "",
+          "line_no": 1000,
+          "type": "consumption",
+          "date_time": "2024-11-30T16:55:12.750Z",
+          "user": 120
+        },
+        {
+          "ItemNo": "G2009",
+          "Quantity": 165.96,
+          "uom": "KG",
+          "LocationCode": "2055",
+          "BIN": "",
+          "line_no": 2000,
+          "type": "output",
+          "date_time": "2024-11-30T16:55:12.750Z",
+          "user": 120
+        }
+      ]
+    },
+    {
+      "production_order_no": "MC_1732985712751",
+      "Quantity": 102.7,
+      "uom": "KG",
+      "ItemNo": "G2008",
+      "LocationCode": "2055",
+      "BIN": "",
+      "user": 120,
+      "line_no": 1000,
+      "routing": "production_order.bc",
+      "date_time": "2024-11-30T16:55:12.751Z",
+      "ProductionJournalLines": [
+        {
+          "ItemNo": "G1230",
+          "Quantity": 108.1,
+          "uom": "KG",
+          "LocationCode": "1570",
+          "BIN": "",
+          "line_no": 1000,
+          "type": "consumption",
+          "date_time": "2024-11-30T16:55:12.751Z",
+          "user": 120
+        },
+        {
+          "ItemNo": "G2008",
+          "Quantity": 102.7,
+          "uom": "KG",
+          "LocationCode": "2055",
+          "BIN": "",
+          "line_no": 2000,
+          "type": "output",
+          "date_time": "2024-11-30T16:55:12.751Z",
+          "user": 120
+        }
+      ]
+    },
+    {
+      "production_order_no": "MC_1732985712889",
+      "Quantity": 126.92,
+      "uom": "KG",
+      "ItemNo": "G2044",
+      "LocationCode": "2055",
+      "BIN": "",
+      "user": 120,
+      "line_no": 1000,
+      "routing": "production_order.bc",
+      "date_time": "2024-11-30T16:55:12.889Z",
+      "ProductionJournalLines": [
+        {
+          "ItemNo": "G1338",
+          "Quantity": 133.6,
+          "uom": "KG",
+          "LocationCode": "1570",
+          "BIN": "",
+          "line_no": 1000,
+          "type": "consumption",
+          "date_time": "2024-11-30T16:55:12.889Z",
+          "user": 120
+        },
+        {
+          "ItemNo": "G2044",
+          "Quantity": 126.92,
+          "uom": "KG",
+          "LocationCode": "2055",
+          "BIN": "",
+          "line_no": 2000,
+          "type": "output",
+          "date_time": "2024-11-30T16:55:12.889Z",
+          "user": 120
+        }
+      ]
+    }
+  ]
